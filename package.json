@@ -10,10 +10,17 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.5",
+    "@react-navigation/bottom-tabs": "^5.0.0-alpha.34",
+    "@react-navigation/native": "^5.0.0-alpha.24",
+    "@react-navigation/stack": "^5.0.0-alpha.58",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-drax": "^0.3.2",
-    "react-native-gesture-handler": "^1.5.3"
+    "react-native-gesture-handler": "^1.5.3",
+    "react-native-reanimated": "^1.4.0",
+    "react-native-safe-area-context": "^0.6.2",
+    "react-native-screens": "^2.0.0-alpha.23"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

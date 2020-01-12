@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
 	board: {
 		borderColor: 'black',
 		borderWidth: 3,
-		// aspectRatio: 1,
 	},
 	row: {
 		flexDirection: 'row',

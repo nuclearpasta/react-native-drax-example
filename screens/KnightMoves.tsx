@@ -22,10 +22,6 @@ interface ChessSquareProps {
 	receptive: boolean;
 }
 
-Dimensions.addEventListener('change', () => {
-	console.log('dimensions changed');
-});
-
 const ChessSquare = ({ width, position, receptive }: ChessSquareProps) => {
 	const { row, column } = position;
 	const colorStyle = (row % 2 === column % 2) ? styles.light : styles.dark;

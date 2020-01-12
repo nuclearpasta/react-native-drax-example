@@ -29,7 +29,7 @@ const ColorBlock = ({ name, style }: ColorBlockProps) => (
 	</DraxView>
 );
 
-const DragDrop = () => {
+const ColorDragDrop = () => {
 	const [received, setReceived] = useState<string[]>([]);
 	const [staged, setStaged] = useState<string[]>([]);
 	return (
@@ -187,4 +187,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default DragDrop;
+export default ColorDragDrop;

@@ -5428,10 +5428,10 @@ react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
-react-native-drax@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-drax/-/react-native-drax-0.3.2.tgz#7ae3e4c617fbc5c86901b12fdf495a26e6976d8e"
-  integrity sha512-aK5JiRnL125kp5hxTZbtpy4ZbWL8n1ELn9SEUU6fy0zgC028QiRNlH2taw2EA4cwEwGl9Z8hJtiKz9DBijgvBA==
+react-native-drax@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-drax/-/react-native-drax-0.3.3.tgz#31260befeadeede978679c2b0e0d42811a867607"
+  integrity sha512-Sy7zlc/AW1O5LSvI4SQEn6RT1vly2jyn2/strxxB7zZjzm9qr09ammCgwmTaanNdSviyLCzvMufcMI7V8OhaVQ==
   dependencies:
     lodash.isequal "^4.5.0"
     lodash.throttle "^4.1.1"

@@ -18,10 +18,16 @@ const App = () => {
 					<Tab.Screen
 						name="dragDrop"
 						component={DragDrop}
+						options={{
+							title: 'Drag/Drop',
+						}}
 					/>
 					<Tab.Screen
 						name="reorderableList"
 						component={ReorderableList}
+						options={{
+							title: 'DraxList',
+						}}
 					/>
 				</Tab.Navigator>
 			</NavigationNativeContainer>

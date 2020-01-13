@@ -10,10 +10,21 @@
 
 #### Contents
 
+* [Screenshots](#screenshots)
 * [Usage](#usage)
 * [Contributing](#contributing)
 * [Code of Conduct](#code-of-conduct)
 * [License](#license)
+
+
+<a name="screenshots"></a>
+## Screenshots
+
+<a href="images/color-drag-drop.gif"><img src="images/color-drag-drop.gif" width="200" alt="Color Drag-and-Drop" /></a>
+<a href="images/reorderable-list.gif"><img src="images/reorderable-list.gif" width="200" alt="Reorderable List" /></a>
+<a href="images/knight-moves.gif"><img src="images/knight-moves.gif" width="200" alt="Knight Moves" /></a>
+
+(Click images to see larger versions.)
 
 <a name="usage"></a>
 ## Usage

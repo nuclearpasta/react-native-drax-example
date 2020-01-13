@@ -12,6 +12,7 @@ import {
 	DraxProvider,
 	DraxView,
 	DraxViewDragStatus,
+	DraxSnapbackTargetPreset,
 } from 'react-native-drax';
 
 interface ColorWeights {
@@ -50,7 +51,6 @@ const ColorBlock = ({ name, weights }: ColorBlockProps) => (
 		dragReleasedStyle={styles.dragging}
 		hoverDraggingStyle={styles.hoverDragging}
 		dragPayload={{ weights, text: name[0] }}
-		longPressDelay={0}
 	>
 		<Text>{name}</Text>
 	</DraxView>
@@ -127,6 +127,7 @@ const ColorDragDrop = () => {
 							green: receivedWeights.green + weights.green,
 							blue: receivedWeights.blue + weights.blue,
 						});
+						return DraxSnapbackTargetPreset.None;
 					}}
 				/>
 				<View style={styles.palette}>
@@ -241,6 +242,7 @@ const ColorDragDrop = () => {
 							green: stagedWeights.green + weights.green,
 							blue: stagedWeights.blue + weights.blue,
 						});
+						return DraxSnapbackTargetPreset.None;
 					}}
 					onDragDrop={() => {
 						setStagedText([]);

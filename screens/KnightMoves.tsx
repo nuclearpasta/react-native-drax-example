@@ -101,7 +101,6 @@ const KnightMoves = () => {
 							onDragDrop={() => {
 								setMoving(false);
 							}}
-							longPressDelay={0}
 						>
 							<Icon
 								name="chess-knight"

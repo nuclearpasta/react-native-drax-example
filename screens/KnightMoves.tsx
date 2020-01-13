@@ -3,6 +3,7 @@ import {
 	Dimensions,
 	StyleSheet,
 	View,
+	Text,
 } from 'react-native';
 import {
 	DraxProvider,
@@ -47,7 +48,8 @@ const KnightMoves = () => {
 	const [knightPos, setKnightPos] = useState<BoardPosition>({ row: 5, column: 5 });
 	const [moving, setMoving] = useState(false);
 	const { width, height } = Dimensions.get('window');
-	const squareWidth = (Math.min(width, height) * 0.75) / 8;
+	const boardWidth = Math.min(width, height) * 0.75;
+	const squareWidth = boardWidth / 8;
 	const rowViews: JSX.Element[] = [];
 	for (let row = 0; row < 8; row += 1) {
 		const squareViews: JSX.Element[] = [];
@@ -75,37 +77,49 @@ const KnightMoves = () => {
 	return (
 		<DraxProvider>
 			<View style={styles.container}>
-				<View style={styles.board}>
-					{rowViews}
-					<DraxView
-						style={[
-							styles.knight,
-							{
-								width: squareWidth,
-								height: squareWidth,
-								top: knightPos.row * squareWidth,
-								left: knightPos.column * squareWidth,
-							},
-						]}
-						draggingStyle={styles.dragging}
-						dragPayload={{ setKnightPos }}
-						onDragStart={() => {
-							setMoving(true);
-						}}
-						onDragEnd={() => {
-							setMoving(false);
-						}}
-						onDragDrop={() => {
-							setMoving(false);
-						}}
-						longPressDelay={0}
-					>
-						<Icon
-							name="chess-knight"
-							size={squareWidth * 0.8}
-							color="black"
-						/>
-					</DraxView>
+				<View style={styles.containerRow}>
+					<View style={styles.board}>
+						{rowViews}
+						<DraxView
+							style={[
+								styles.knight,
+								{
+									width: squareWidth,
+									height: squareWidth,
+									top: knightPos.row * squareWidth,
+									left: knightPos.column * squareWidth,
+								},
+							]}
+							draggingStyle={styles.dragging}
+							dragPayload={{ setKnightPos }}
+							onDragStart={() => {
+								setMoving(true);
+							}}
+							onDragEnd={() => {
+								setMoving(false);
+							}}
+							onDragDrop={() => {
+								setMoving(false);
+							}}
+							longPressDelay={0}
+						>
+							<Icon
+								name="chess-knight"
+								size={squareWidth * 0.8}
+								color="black"
+							/>
+						</DraxView>
+					</View>
+					<View style={{ width: boardWidth }}>
+						<Text style={styles.instructionText}>
+							Start dragging the knight, and the legal move positions will
+							be highlighted with blue borders. When dragging the knight over
+							one of those positions, the square will be highlighted with a
+							magenta border instead. Release the drag in a legal position to
+							move the knight; release it anywhere else, and it will snap back
+							to its original position.
+						</Text>
+					</View>
 				</View>
 			</View>
 		</DraxProvider>
@@ -115,9 +129,15 @@ const KnightMoves = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		padding: 10,
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 10,
+	},
+	containerRow: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	board: {
 		borderColor: 'black',
@@ -150,6 +170,11 @@ const styles = StyleSheet.create({
 	},
 	dragging: {
 		opacity: 0.2,
+	},
+	instructionText: {
+		margin: 12,
+		fontSize: 16,
+		fontStyle: 'italic',
 	},
 });
 

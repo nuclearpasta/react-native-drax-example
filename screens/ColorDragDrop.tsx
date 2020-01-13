@@ -7,12 +7,12 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
 	DraxProvider,
 	DraxView,
 	DraxViewDragStatus,
 } from 'react-native-drax';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 interface ColorWeights {
 	red: number;

@@ -4,25 +4,52 @@ import {
 	View,
 	Text,
 	ViewStyle,
+	TouchableOpacity,
 } from 'react-native';
+import { useSafeArea } from 'react-native-safe-area-context';
 import {
 	DraxProvider,
 	DraxView,
 	DraxViewDragStatus,
 } from 'react-native-drax';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
+interface ColorWeights {
+	red: number;
+	green: number;
+	blue: number;
+}
 
 interface ColorBlockProps {
 	name: string;
-	style: ViewStyle;
+	weights: ColorWeights;
 }
 
-const ColorBlock = ({ name, style }: ColorBlockProps) => (
+const getStyleForWeights = ({ red, green, blue }: ColorWeights) => {
+	const total = red + green + blue;
+	let backgroundColor = '#dddddd';
+	if (total > 0) {
+		const r = Math.ceil(128 + 127 * (red / total));
+		const g = Math.ceil(128 + 127 * (green / total));
+		const b = Math.ceil(128 + 127 * (blue / total));
+		backgroundColor = `rgb(${r}, ${g}, ${b})`;
+	}
+	return { backgroundColor };
+};
+
+const getEmptyWeights = () => ({ red: 0, green: 0, blue: 0 });
+
+const ColorBlock = ({ name, weights }: ColorBlockProps) => (
 	<DraxView
-		style={[styles.centeredContent, styles.draggableBox, style]}
+		style={[
+			styles.centeredContent,
+			styles.colorBlock,
+			getStyleForWeights(weights),
+		]}
 		draggingStyle={styles.dragging}
 		dragReleasedStyle={styles.dragging}
 		hoverDraggingStyle={styles.hoverDragging}
-		dragPayload={{ text: name[0] }}
+		dragPayload={{ weights, text: name[0] }}
 		longPressDelay={0}
 	>
 		<Text>{name}</Text>
@@ -30,13 +57,29 @@ const ColorBlock = ({ name, style }: ColorBlockProps) => (
 );
 
 const ColorDragDrop = () => {
-	const [received, setReceived] = useState<string[]>([]);
-	const [staged, setStaged] = useState<string[]>([]);
+	const [receivedWeights, setReceivedWeights] = useState<ColorWeights>(getEmptyWeights());
+	const [receivedText, setReceivedText] = useState<string[]>([]);
+	const [stagedWeights, setStagedWeights] = useState<ColorWeights>(getEmptyWeights());
+	const [stagedText, setStagedText] = useState<string[]>([]);
+	const insets = useSafeArea();
 	return (
 		<DraxProvider>
-			<View style={styles.container}>
+			<View
+				style={[
+					styles.container,
+					{
+						paddingTop: insets.top,
+						paddingLeft: insets.left,
+						paddingRight: insets.right,
+					},
+				]}
+			>
 				<DraxView
-					style={[styles.centeredContent, styles.receivingZone, styles.magenta]}
+					style={[
+						styles.centeredContent,
+						styles.receivingZone,
+						getStyleForWeights(receivedWeights),
+					]}
 					receivingStyle={styles.receiving}
 					renderContent={({ viewState }) => {
 						const receivingDrag = viewState?.receivingDrag;
@@ -45,34 +88,89 @@ const ColorDragDrop = () => {
 							<>
 								<Text>Receiving Zone</Text>
 								<Text style={styles.incomingText}>{incomingText || '-'}</Text>
-								<Text style={styles.received}>{received.join(' ')}</Text>
+								{(receivedText.length > 0) ? (
+									<Text style={styles.received}>
+										{receivedText.join(' ')}
+									</Text>
+								) : (
+									<Text style={styles.instruction}>
+										Drag colors here
+									</Text>
+								)}
+								{receivedText.length > 0 && (
+									<View style={styles.overlay}>
+										<TouchableOpacity
+											onPress={() => {
+												setReceivedText([]);
+												setReceivedWeights(getEmptyWeights());
+											}}
+										>
+											<View style={styles.trashButton}>
+												<Icon
+													size={20}
+													name="trash-alt"
+													color="#333333"
+												/>
+											</View>
+										</TouchableOpacity>
+									</View>
+								)}
 							</>
 						);
 					}}
 					onReceiveDragDrop={(event) => {
-						setReceived([
-							...received,
-							event.dragged.payload?.text || '?',
-						]);
+						const { text, weights } = event.dragged.payload
+							?? { text: '?', weights: getEmptyWeights() };
+						setReceivedText([...receivedText, text]);
+						setReceivedWeights({
+							red: receivedWeights.red + weights.red,
+							green: receivedWeights.green + weights.green,
+							blue: receivedWeights.blue + weights.blue,
+						});
 					}}
 				/>
 				<View style={styles.palette}>
-					<ColorBlock name="Red" style={styles.red} />
-					<ColorBlock name="Green" style={styles.green} />
-					<ColorBlock name="Blue" style={styles.blue} />
-					<ColorBlock name="Yellow" style={styles.yellow} />
+					<View style={styles.paletteRow}>
+						<ColorBlock
+							name="Red"
+							weights={{ red: 1, green: 0, blue: 0 }}
+						/>
+						<ColorBlock
+							name="Green"
+							weights={{ red: 0, green: 1, blue: 0 }}
+						/>
+						<ColorBlock
+							name="Blue"
+							weights={{ red: 0, green: 0, blue: 1 }}
+						/>
+					</View>
+					<View style={styles.paletteRow}>
+						<ColorBlock
+							name="Cyan"
+							weights={{ red: 0, green: 1, blue: 1 }}
+						/>
+						<ColorBlock
+							name="Magenta"
+							weights={{ red: 1, green: 0, blue: 1 }}
+						/>
+						<ColorBlock
+							name="Yellow"
+							weights={{ red: 1, green: 1, blue: 0 }}
+						/>
+					</View>
 				</View>
 				<DraxView
-					dragPayload={{ text: staged.join(' ') }}
-					draggable={staged.length > 0}
+					dragPayload={{ weights: stagedWeights, text: stagedText.join(' ') }}
+					draggable={stagedText.length > 0}
+					style={styles.stagingLayout}
 					renderContent={({ viewState }) => {
 						const receivingDrag = viewState?.receivingDrag;
 						const incomingText = receivingDrag?.payload?.text;
 						const active = viewState?.dragStatus !== DraxViewDragStatus.Inactive;
 						const combinedStyles: ViewStyle[] = [
 							styles.centeredContent,
-							styles.receivingZone,
-							styles.cyan,
+							styles.stagingZone,
+							getStyleForWeights(stagedWeights),
 						];
 						if (active) {
 							combinedStyles.push({ opacity: 0.2 });
@@ -83,19 +181,45 @@ const ColorDragDrop = () => {
 							<View style={combinedStyles}>
 								<Text>Staging Zone</Text>
 								<Text style={styles.incomingText}>{incomingText || '-'}</Text>
-								<Text style={styles.received}>{staged.join(' ')}</Text>
+								{(stagedText.length > 0) ? (
+									<Text style={styles.received}>
+										{stagedText.join(' ')}
+									</Text>
+								) : (
+									<Text style={styles.instruction}>
+										Drag colors here, then drag this to receiving zone
+									</Text>
+								)}
+								{stagedText.length > 0 && (
+									<View style={styles.overlay}>
+										<TouchableOpacity
+											onPress={() => {
+												setStagedText([]);
+												setStagedWeights(getEmptyWeights());
+											}}
+										>
+											<View style={styles.trashButton}>
+												<Icon
+													size={20}
+													name="trash-alt"
+													color="#333333"
+												/>
+											</View>
+										</TouchableOpacity>
+									</View>
+								)}
 							</View>
 						);
 					}}
 					renderHoverContent={({ viewState }) => {
 						const combinedStyles: ViewStyle[] = [
 							styles.centeredContent,
-							styles.draggableBox,
-							styles.cyan,
+							styles.colorBlock,
+							getStyleForWeights(stagedWeights),
 						];
 						if (viewState.grabOffset) {
 							combinedStyles.push({
-								marginLeft: viewState.grabOffset.x - 30,
+								marginLeft: viewState.grabOffset.x - 40,
 								marginTop: viewState.grabOffset.y - 30,
 							});
 						}
@@ -104,17 +228,25 @@ const ColorDragDrop = () => {
 						}
 						return (
 							<View style={combinedStyles}>
-								<Text style={styles.stagedCount}>{staged.length}</Text>
+								<Text style={styles.stagedCount}>{stagedText.length}</Text>
 							</View>
 						);
 					}}
 					onReceiveDragDrop={(event) => {
-						setStaged([
-							...staged,
-							event.dragged.payload?.text || '?',
-						]);
+						const { text, weights } = event.dragged.payload
+							?? { text: '?', weights: getEmptyWeights() };
+						setStagedText([...stagedText, text]);
+						setStagedWeights({
+							red: stagedWeights.red + weights.red,
+							green: stagedWeights.green + weights.green,
+							blue: stagedWeights.blue + weights.blue,
+						});
 					}}
-					onDragDrop={() => setStaged([])}
+					onDragDrop={() => {
+						setStagedText([]);
+						setStagedWeights(getEmptyWeights());
+					}}
+					longPressDelay={200}
 				/>
 			</View>
 		</DraxProvider>
@@ -124,21 +256,34 @@ const ColorDragDrop = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 12,
-		paddingTop: 40,
-		justifyContent: 'space-evenly',
 	},
 	centeredContent: {
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	receivingZone: {
-		height: 200,
+		flex: 3,
 		borderRadius: 10,
+		margin: 8,
+		borderColor: '#ffffff',
+		borderWidth: 2,
+	},
+	overlay: {
+		...StyleSheet.absoluteFillObject,
+		justifyContent: 'flex-end',
+		alignItems: 'flex-end',
+	},
+	trashButton: {
+		width: 30,
+		height: 30,
+		backgroundColor: '#999999',
+		borderRadius: 15,
+		margin: 10,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	receiving: {
 		borderColor: 'red',
-		borderWidth: 2,
 	},
 	incomingText: {
 		marginTop: 10,
@@ -148,38 +293,42 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		fontSize: 18,
 	},
+	instruction: {
+		marginTop: 10,
+		fontSize: 12,
+		fontStyle: 'italic',
+	},
 	palette: {
+		justifyContent: 'center',
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+	},
+	paletteRow: {
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
+		marginVertical: 8,
 	},
-	draggableBox: {
-		width: 60,
+	colorBlock: {
+		width: 80,
 		height: 60,
 		borderRadius: 10,
-	},
-	green: {
-		backgroundColor: '#aaffaa',
-	},
-	blue: {
-		backgroundColor: '#aaaaff',
-	},
-	red: {
-		backgroundColor: '#ffaaaa',
-	},
-	yellow: {
-		backgroundColor: '#ffffaa',
-	},
-	cyan: {
-		backgroundColor: '#aaffff',
-	},
-	magenta: {
-		backgroundColor: '#ffaaff',
+		marginHorizontal: 8,
 	},
 	dragging: {
 		opacity: 0.2,
 	},
 	hoverDragging: {
 		borderColor: 'magenta',
+		borderWidth: 2,
+	},
+	stagingLayout: {
+		flex: 3,
+		margin: 8,
+	},
+	stagingZone: {
+		flex: 1,
+		borderRadius: 10,
+		borderColor: '#ffffff',
 		borderWidth: 2,
 	},
 	stagedCount: {

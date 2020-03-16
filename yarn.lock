@@ -4709,9 +4709,9 @@ minimist@0.0.8:
   integrity sha1-hX/Kv8M5fSYluCKCYuhqp6ARsF0=
 
 minimist@^1.1.1, minimist@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-  integrity sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
+  integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
 minimist@~0.0.1:
   version "0.0.10"
@@ -5428,10 +5428,10 @@ react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
-react-native-drax@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-drax/-/react-native-drax-0.4.0.tgz#5d25296a8508d784f92495dd41f23745af2ae4bc"
-  integrity sha512-FKcGnOsPL1XoqCcShnow0rA3/cHS/wUcrW2gDGaIguQEZrjRD5oDoBQ46e4MZwWwN+Ef0R2ooVzXZihPKOV5Wg==
+react-native-drax@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-drax/-/react-native-drax-0.5.2.tgz#ec4eeb47277cb20cd04045fba5ff0d00e158403e"
+  integrity sha512-oCLVznZxqxh31xLBvw9MS4Db5BAkHbPK8qIgcbTO+fo9N3xpT52DFgPz7UweDnXVQs2JjIpgNd+LI8s/OEqOjQ==
   dependencies:
     lodash.isequal "^4.5.0"
     lodash.throttle "^4.1.1"

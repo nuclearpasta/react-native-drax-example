@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { StatusBar } from 'react-native';
-import { NavigationNativeContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -15,7 +15,7 @@ const App = () => {
 	return (
 		<>
 			<StatusBar barStyle="dark-content" />
-			<NavigationNativeContainer>
+			<NavigationContainer>
 				<Tab.Navigator>
 					<Tab.Screen
 						name="colorDragDrop"
@@ -48,7 +48,7 @@ const App = () => {
 						}}
 					/>
 				</Tab.Navigator>
-			</NavigationNativeContainer>
+			</NavigationContainer>
 		</>
 	);
 };

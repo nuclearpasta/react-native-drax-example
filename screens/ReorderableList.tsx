@@ -77,7 +77,32 @@ const ReorderableList = () => {
 							<Text style={styles.alphaText}>{item}</Text>
 						</View>
 					)}
-					onItemReorder={({ fromIndex, toIndex }) => {
+					onItemDragStart={({ index, item }) => {
+						console.log(`Item #${index} (${item}) drag start`);
+					}}
+					onItemDragPositionChange={({
+						index,
+						item,
+						toIndex,
+						previousIndex,
+					}) => {
+						console.log(`Item #${index} (${item}) dragged to index ${toIndex} (previous: ${previousIndex})`);
+					}}
+					onItemDragEnd={({
+						index,
+						item,
+						toIndex,
+						toItem,
+					}) => {
+						console.log(`Item #${index} (${item}) drag ended at index ${toIndex} (${toItem})`);
+					}}
+					onItemReorder={({
+						fromIndex,
+						fromItem,
+						toIndex,
+						toItem,
+					}) => {
+						console.log(`Item dragged from index ${fromIndex} (${fromItem}) to index ${toIndex} (${toItem})`);
 						const newData = alphaData.slice();
 						newData.splice(toIndex, 0, newData.splice(fromIndex, 1)[0]);
 						setAlphaData(newData);

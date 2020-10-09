@@ -4,7 +4,7 @@ import {
 	View,
 	Text,
 } from 'react-native';
-import { useSafeArea } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { DraxProvider, DraxList, DraxViewDragStatus } from 'react-native-drax';
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -49,18 +49,11 @@ const getItemStyleTweaks = (alphaItem: string) => {
 
 const ReorderableList = () => {
 	const [alphaData, setAlphaData] = React.useState(alphabet);
-	const insets = useSafeArea();
 	return (
 		<DraxProvider>
-			<View
-				style={[
-					styles.container,
-					{
-						paddingTop: insets.top,
-						paddingLeft: insets.left,
-						paddingRight: insets.right,
-					},
-				]}
+			<SafeAreaView
+				edges={['top', 'left', 'right']}
+				style={styles.container}
 			>
 				<DraxList
 					data={alphaData}
@@ -119,7 +112,7 @@ const ReorderableList = () => {
 						</View>
 					)}
 				/>
-			</View>
+			</SafeAreaView>
 		</DraxProvider>
 	);
 };

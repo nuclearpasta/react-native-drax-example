@@ -6,8 +6,8 @@ import {
 	ViewStyle,
 	TouchableOpacity,
 } from 'react-native';
-import { useSafeArea } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
 	DraxProvider,
 	DraxView,
@@ -61,18 +61,11 @@ const ColorDragDrop = () => {
 	const [receivedText, setReceivedText] = useState<string[]>([]);
 	const [stagedWeights, setStagedWeights] = useState<ColorWeights>(getEmptyWeights());
 	const [stagedText, setStagedText] = useState<string[]>([]);
-	const insets = useSafeArea();
 	return (
 		<DraxProvider>
-			<View
-				style={[
-					styles.container,
-					{
-						paddingTop: insets.top,
-						paddingLeft: insets.left,
-						paddingRight: insets.right,
-					},
-				]}
+			<SafeAreaView
+				edges={['top', 'left', 'right']}
+				style={styles.container}
 			>
 				<DraxView
 					style={[
@@ -108,7 +101,7 @@ const ColorDragDrop = () => {
 											<View style={styles.trashButton}>
 												<Icon
 													size={20}
-													name="trash-alt"
+													name="delete"
 													color="#333333"
 												/>
 											</View>
@@ -202,7 +195,7 @@ const ColorDragDrop = () => {
 											<View style={styles.trashButton}>
 												<Icon
 													size={20}
-													name="trash-alt"
+													name="delete"
 													color="#333333"
 												/>
 											</View>
@@ -250,7 +243,7 @@ const ColorDragDrop = () => {
 					}}
 					longPressDelay={200}
 				/>
-			</View>
+			</SafeAreaView>
 		</DraxProvider>
 	);
 };

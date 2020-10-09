@@ -3,41 +3,41 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ColorDragDrop from './screens/ColorDragDrop';
 import ReorderableList from './screens/ReorderableList';
 import KnightMoves from './screens/KnightMoves';
 
-const Tab = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 
 const App = () => {
 	return (
 		<>
 			<StatusBar barStyle="dark-content" />
 			<NavigationContainer>
-				<Tab.Navigator>
-					<Tab.Screen
+				<Navigator>
+					<Screen
 						name="colorDragDrop"
 						component={ColorDragDrop}
 						options={{
 							tabBarLabel: 'Color Drag/Drop',
 							tabBarIcon: ({ color, size }) => (
-								<Icon name="tint" color={color} size={size} />
+								<Icon name="water" color={color} size={size} />
 							),
 						}}
 					/>
-					<Tab.Screen
+					<Screen
 						name="reorderableList"
 						component={ReorderableList}
 						options={{
 							tabBarLabel: 'Reorderable List',
 							tabBarIcon: ({ color, size }) => (
-								<Icon name="list-ol" color={color} size={size} />
+								<Icon name="format-list-bulleted" color={color} size={size} />
 							),
 						}}
 					/>
-					<Tab.Screen
+					<Screen
 						name="knightMoves"
 						component={KnightMoves}
 						options={{
@@ -47,7 +47,7 @@ const App = () => {
 							),
 						}}
 					/>
-				</Tab.Navigator>
+				</Navigator>
 			</NavigationContainer>
 		</>
 	);

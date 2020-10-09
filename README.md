@@ -39,6 +39,14 @@ $ cd ios; pod install; cd ..
 $ yarn run ios
 ```
 
+Note that during the build you will see an error like this:
+```
+error React Native CLI uses autolinking for native dependencies, but the following modules are linked manually:
+  - react-native-vector-icons (to unlink run: "react-native unlink react-native-vector-icons")
+```
+
+This is expected and will continue until [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons/) has [full autolinking support](https://github.com/oblador/react-native-vector-icons/issues/1185). You can ignore the message.
+
 <a name="contributing"></a>
 ## Contributing
 

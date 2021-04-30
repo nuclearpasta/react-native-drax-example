@@ -157,6 +157,11 @@ const ColorDragDrop = () => {
 					dragPayload={{ weights: stagedWeights, text: stagedText.join(' ') }}
 					draggable={stagedText.length > 0}
 					style={styles.stagingLayout}
+					hoverDraggingStyle={{
+						transform: [
+							{ rotate: '10deg' },
+						],
+					}}
 					renderContent={({ viewState }) => {
 						const receivingDrag = viewState?.receivingDrag;
 						const incomingText = receivingDrag?.payload?.text;

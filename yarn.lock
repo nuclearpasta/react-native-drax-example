@@ -5913,15 +5913,14 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-drax@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-drax/-/react-native-drax-0.6.0.tgz#a2351f22a514c4d6ab3c496decd2ed14d4edcfa9"
-  integrity sha512-G9CmpKljpzdhZc0i0cFEt4yd3MhcdRYcJ+stpEpC1ax+HZyacId2+pLIj8gdd/0mb+fVD26n0K3MRZuE3zEV4Q==
+react-native-drax@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-drax/-/react-native-drax-0.8.0.tgz#249974c45cd2a15d9b68962770ae78e8005e3eac"
+  integrity sha512-NLqXh9aqnclVjRjEXsu/unocDcddCtXt5oVA1pVJ5DxqWw7gl1ZckSnMwxohEVKXG2ig477zuTt+1aBUOvVsPw==
   dependencies:
     lodash.isequal "^4.5.0"
     lodash.throttle "^4.1.1"
     typesafe-actions "^5.1.0"
-    uuid "^3.3.3"
 
 react-native-gesture-handler@^1.8.0:
   version "1.8.0"
@@ -7236,7 +7235,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@^3.3.2, uuid@^3.3.3:
+uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==

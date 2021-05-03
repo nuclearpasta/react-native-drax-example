@@ -1,6 +1,6 @@
 {
 	"name": "react-native-drax-example",
-	"version": "0.2.0",
+	"version": "0.8.0",
 	"private": true,
 	"scripts": {
 		"android": "react-native run-android",

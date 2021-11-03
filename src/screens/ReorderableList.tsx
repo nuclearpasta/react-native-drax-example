@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	StyleSheet,
 	View,
 	Text,
+	FlatList,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DraxProvider, DraxList, DraxViewDragStatus } from 'react-native-drax';
@@ -49,6 +50,7 @@ const getItemStyleTweaks = (alphaItem: string) => {
 
 const ReorderableList = () => {
 	const [alphaData, setAlphaData] = React.useState(alphabet);
+	const listRef = useRef<FlatList | null>(null);
 	return (
 		<DraxProvider>
 			<SafeAreaView
@@ -56,6 +58,7 @@ const ReorderableList = () => {
 				style={styles.container}
 			>
 				<DraxList
+					ref={listRef}
 					data={alphaData}
 					renderItemContent={({ item }, { viewState, hover }) => (
 						<View

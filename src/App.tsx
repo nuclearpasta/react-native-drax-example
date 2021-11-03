@@ -3,11 +3,13 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ColorDragDrop from './screens/ColorDragDrop';
 import ReorderableList from './screens/ReorderableList';
 import KnightMoves from './screens/KnightMoves';
+import Scrolling from './screens/Scrolling';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -44,6 +46,16 @@ const App = () => {
 							tabBarLabel: 'Knight Moves',
 							tabBarIcon: ({ color, size }) => (
 								<Icon name="chess-knight" color={color} size={size} />
+							),
+						}}
+					/>
+					<Screen
+						name="scrolling"
+						component={Scrolling}
+						options={{
+							tabBarLabel: 'Scrolling',
+							tabBarIcon: ({ color, size }) => (
+								<Icon name="arrow-left-right" color={color} size={size} />
 							),
 						}}
 					/>

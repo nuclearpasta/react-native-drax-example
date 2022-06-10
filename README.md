@@ -8,6 +8,8 @@
 
 [Drax](https://github.com/nuclearpasta/react-native-drax) is a declarative drag-and-drop system for React Native, written in TypeScript. This repository contains a React Native application which uses the `react-native-drax` library to demonstrate several examples for reference.
 
+**IMPORTANT: This example project has not been updated to the latest Drax. As of Drax 0.10.0, React Native >=0.65 is required. This project is still on Drax 0.9.3 and RN 0.63.3, and the maintainer does not currently have availability to refresh it. [Contributors are welcome!](#contributing)
+
 #### Contents
 
 * [Screenshots](#screenshots)

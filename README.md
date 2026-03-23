@@ -1,5 +1,7 @@
 # react-native-drax-example
 
+## ARCHIVED - See new example at https://nuclearpasta.com/react-native-drax/example
+
 **A demonstration of a drag-and-drop system for React Native**
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE-OF-CONDUCT.md)
